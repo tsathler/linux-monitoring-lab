@@ -1,0 +1,16 @@
+# Environment variables
+.env
+
+# Grafana persistent data
+grafana/data/
+
+# Prometheus persistent data
+prometheus/data/
+
+# Logs
+*.log
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
