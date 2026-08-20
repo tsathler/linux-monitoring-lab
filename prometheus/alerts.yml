@@ -1,0 +1,38 @@
+groups:
+  - name: linux-server-alerts
+    rules:
+      - alert: NodeExporterDown
+        expr: up{job="node-exporter"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Node Exporter indisponível"
+          description: "O target {{ $labels.instance }} está sem resposta há mais de 1 minuto."
+
+      - alert: HighCPUUsage
+        expr: (1 - avg by (instance) (rate(node_cpu_seconds_total{job="node-exporter",mode="idle"}[5m]))) * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Uso de CPU elevado"
+          description: "A utilização de CPU em {{ $labels.instance }} está acima de 80% há mais de 5 minutos."
+
+      - alert: HighMemoryUsage
+        expr: (1 - (node_memory_MemAvailable_bytes{job="node-exporter"} / node_memory_MemTotal_bytes{job="node-exporter"})) * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Uso de memória elevado"
+          description: "A utilização de memória em {{ $labels.instance }} está acima de 80% há mais de 5 minutos."
+
+      - alert: RootFilesystemAlmostFull
+        expr: (1 - (node_filesystem_avail_bytes{job="node-exporter",mountpoint="/",fstype!~"tmpfs|overlay"} / node_filesystem_size_bytes{job="node-exporter",mountpoint="/",fstype!~"tmpfs|overlay"})) * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Filesystem raiz quase cheio"
+          description: "O filesystem raiz em {{ $labels.instance }} está acima de 80% de utilização."
