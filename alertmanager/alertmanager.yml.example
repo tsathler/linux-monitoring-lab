@@ -1,0 +1,20 @@
+global:
+  # Substitua pelo SMTP real. smtp.example.com não entrega mensagens.
+  smtp_smarthost: 'smtp.example.com:587'
+  smtp_from: 'alertas@example.com'
+  smtp_auth_username: 'alertas@example.com'
+  smtp_auth_password: 'SENHA_DE_APLICATIVO_AQUI'
+  smtp_require_tls: true
+
+route:
+  receiver: 'email-test'
+  group_by: ['alertname', 'job']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 4h
+
+receivers:
+  - name: 'email-test'
+    email_configs:
+      - to: 'destinatario@example.com'
+        send_resolved: true

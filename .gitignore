@@ -7,6 +7,9 @@ grafana/data/
 # Prometheus persistent data
 prometheus/data/
 
+# Alertmanager configuration with real SMTP credentials
+alertmanager/alertmanager.yml
+
 # Logs
 *.log
 

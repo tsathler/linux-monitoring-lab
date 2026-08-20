@@ -21,6 +21,19 @@ services:
       - ./prometheus/alerts.yml:/etc/prometheus/alerts.yml:ro
       - prometheus-data:/prometheus
 
+  alertmanager:
+    image: prom/alertmanager:latest
+    container_name: alertmanager
+    profiles:
+      - alerting
+    restart: unless-stopped
+    ports:
+      - "9093:9093"
+    volumes:
+      - ./alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
+    command:
+      - "--config.file=/etc/alertmanager/alertmanager.yml"
+
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
