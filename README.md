@@ -39,7 +39,11 @@ As imagens do Compose usam versões fixadas para evitar atualizações inesperad
 ├── alertmanager/alertmanager.yml.example
 └── docs/
     ├── architecture.md
-    └── alerting.md
+    ├── alerting.md
+    └── images/
+        ├── dashboard-overview.png
+        ├── prometheus-alerts.png
+        └── prometheus-targets.png
 ```
 
 ## Execução
@@ -97,6 +101,20 @@ rate(node_network_transmit_bytes_total{device="eth0"}[5m])
 
 O nome da interface deve ser confirmado nas métricas do Node Exporter. Neste ambiente, a métrica validada usa `eth0`, embora a interface física seja `enp0s3`.
 
+## Evidências
+
+### Dashboard
+
+![Dashboard Linux Server Monitoring](docs/images/dashboard-overview.png)
+
+### Targets do Prometheus
+
+![Prometheus targets](docs/images/prometheus-targets.png)
+
+### Regras de alerta
+
+![Prometheus alerts](docs/images/prometheus-alerts.png)
+
 ## Testes realizados
 
 - Carga controlada de CPU com dois processos `yes > /dev/null`.
@@ -107,12 +125,13 @@ O nome da interface deve ser confirmado nas métricas do Node Exporter. Neste am
 
 ## Segurança e melhorias futuras
 
-- Fixar versões das imagens em vez de usar `:latest`.
-- Restringir portas com firewall e evitar expor Prometheus e Node Exporter à internet.
+- As versões das imagens estão fixadas no `compose.yaml`.
+- O UFW está ativo no servidor, com acesso restrito à rede do laboratório.
+- Em uma implantação fora do laboratório, restringir ainda mais as portas e evitar expor Prometheus e Node Exporter à internet.
 - Alterar credenciais padrão do Grafana.
 - Configurar Alertmanager com SMTP real e credenciais fora do Git.
 - Criar backups dos named volumes.
-- Revisar permissões, privilégios e screenshots do projeto.
+- Revisar permissões e privilégios dos containers.
 
 ## Estado
 
