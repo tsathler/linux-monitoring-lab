@@ -24,6 +24,8 @@ O Node Exporter usa `/host` em modo somente leitura e `--path.rootfs=/host` para
 - Node Exporter, Prometheus e Grafana
 - Git e GitHub
 
+As imagens do Compose usam versões fixadas para evitar atualizações inesperadas.
+
 ## Estrutura
 
 ```text
