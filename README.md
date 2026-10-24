@@ -172,7 +172,7 @@ O nome da interface deve ser confirmado nas métricas do Node Exporter. Neste am
 
 ### Dashboard
 
-![Dashboard Linux Server Monitoring](docs/images/dashboard-overview.png)
+[Visualizar dashboard](docs/images/dashboard-overview.png)
 
 ### Targets do Prometheus
 
