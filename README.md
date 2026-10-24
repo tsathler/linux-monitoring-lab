@@ -1,5 +1,49 @@
 # Linux Monitoring Lab
 
+## English
+
+**A reproducible Ubuntu Server monitoring lab using Docker Compose, Prometheus, Node Exporter and Grafana.**
+
+### Demo
+
+![Linux Server Monitoring dashboard](docs/images/dashboard-overview.png)
+
+The dashboard displays host status, uptime, CPU, memory, root filesystem, system load and network traffic. [Prometheus targets](docs/images/prometheus-targets.png) and [alert rule evidence](docs/images/prometheus-alerts.png) are also documented.
+
+### Architecture and status
+
+```text
+Ubuntu Server
+├── Node Exporter :9100 — host metrics
+├── Prometheus :9090 — scrape every 15s; evaluate alert rules
+└── Grafana :3000 — dashboard and visualization
+```
+
+The lab uses Ubuntu Server 24.04 LTS, pinned Compose images and persistent named volumes. Monitoring, dashboards, persistence and the basic alert rules work in the lab. **Email notifications are not configured**; Alertmanager remains optional.
+
+Alert rules: `NodeExporterDown`, `HighCPUUsage`, `HighMemoryUsage`, and `RootFilesystemAlmostFull`.
+
+### Run
+
+```sh
+git clone https://github.com/tsathler/linux-monitoring-lab.git
+cd linux-monitoring-lab
+docker compose up -d
+docker compose ps
+```
+
+Grafana uses port 3000, Prometheus port 9090, and Node Exporter port 9100. Restrict access to trusted networks; do not expose monitoring endpoints to the public internet.
+
+### Validation and safeguards
+
+The lab was tested with controlled CPU and memory load, temporary disk I/O, Node Exporter shutdown and container restarts. Node Exporter mounts the host filesystem read-only. `docker compose down` preserves named volumes, while `down -v` deletes them; volumes are **not** a backup strategy. Check network interface labels before reusing the provided PromQL.
+
+**Further reading:** [Architecture](docs/architecture.md) · [Alerting](docs/alerting.md).
+
+---
+
+## Português
+
 **Laboratório de observabilidade Linux com Prometheus, Grafana e Docker Compose.**
 
 > **Estado:** dashboard, coleta, persistência e regras básicas de alerta funcionais no laboratório. Notificações por e-mail ainda não estão configuradas.
