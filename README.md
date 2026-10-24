@@ -1,5 +1,7 @@
 # Linux Monitoring Lab
 
+**Languages:** [English](#english) · [Português](#português)
+
 ## English
 
 **A reproducible Ubuntu Server monitoring lab using Docker Compose, Prometheus, Node Exporter and Grafana.**
@@ -44,13 +46,13 @@ The lab was tested with controlled CPU and memory load, temporary disk I/O, Node
 
 ## Português
 
+[↑ English](#english)
+
 **Laboratório de observabilidade Linux com Prometheus, Grafana e Docker Compose.**
 
 > **Estado:** dashboard, coleta, persistência e regras básicas de alerta funcionais no laboratório. Notificações por e-mail ainda não estão configuradas.
 
 ## Demonstração
-
-![Dashboard Linux Server Monitoring](docs/images/dashboard-overview.png)
 
 O laboratório permite visualizar **CPU, memória, disco, rede, disponibilidade e uptime** e avaliar alertas a partir de métricas coletadas pelo Node Exporter.
 
@@ -174,11 +176,11 @@ O nome da interface deve ser confirmado nas métricas do Node Exporter. Neste am
 
 ### Targets do Prometheus
 
-![Prometheus targets](docs/images/prometheus-targets.png)
+[Captura dos targets](docs/images/prometheus-targets.png)
 
 ### Regras de alerta
 
-![Prometheus alerts](docs/images/prometheus-alerts.png)
+[Captura das regras de alerta](docs/images/prometheus-alerts.png)
 
 ## Testes realizados
 
